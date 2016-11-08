@@ -8,14 +8,15 @@ import (
 	"strings"
 )
 
-func getAllDirs(path string, dirs *[]string, newdirs *[]string) {
-	err := filepath.Walk(path, func(path string, f os.FileInfo, err error) error {
+func getAllDirs(oldpath string, dirs *[]string, newdirs *[]string, newpath string) {
+
+	err := filepath.Walk(oldpath, func(path string, f os.FileInfo, err error) error {
 		if f == nil {
 			return err
 		}
 		if f.IsDir() {
 			*dirs = append(*dirs, path)
-			*newdirs = append(*newdirs, strings.Replace(path, "D:\\pixopipe", "D:\\test_dir", 1))
+			*newdirs = append(*newdirs, strings.Replace(path, oldpath, newpath, 1))
 		}
 		return nil
 	})
@@ -26,11 +27,14 @@ func getAllDirs(path string, dirs *[]string, newdirs *[]string) {
 }
 
 func main() {
-	fmt.Println("test")
-	testpath := "D:\\pixopipe"
+	//fmt.Println("test")
+
+	//testpath := "D:\\temp"
+	testpath := os.Args[1]
+	newpath := os.Args[2]
 	dirs := []string{}
 	newdirs := []string{}
-	getAllDirs(testpath, &dirs, &newdirs)
+	getAllDirs(testpath, &dirs, &newdirs, newpath)
 
 	for _, value := range newdirs {
 		path, _ := filepath.Abs(value)

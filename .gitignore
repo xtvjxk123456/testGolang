@@ -22,3 +22,6 @@ _testmain.go
 *.exe
 *.test
 *.prof
+.idea/libraries/GOPATH__testGolang_.xml
+.idea/workspace.xml
+.idea/
