@@ -30,6 +30,11 @@ func main() {
 	//fmt.Println("test")
 
 	//testpath := "D:\\temp"
+	if len(os.Args) == 1{
+		fmt.Println("this tool use to copy dir struct..")
+		return
+	}
+
 	testpath := os.Args[1]
 	newpath := os.Args[2]
 	dirs := []string{}
